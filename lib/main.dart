@@ -38,10 +38,17 @@ class _QuizPageState extends State<QuizPage> {
     'น้ำระเหยเป็นน้ำแข็ง',
     'คาร์บอนเป็นธาตุอโลหะ',
     'Elephant is animal',
+    'Uranium-235 could cure cancer',
+    'Rock is the longest living creature ever',
+    'Termite like to eat wood',
+    'Gunpowder is invented in Mongolia',
+    '1 kg of steel is heavier than 1 kg of feather',
+
   ];
-  List<bool> answers = [true, true, false, true, true];
+  List<bool> answers = [true, true, false, true, true, false, false, true, false, false];
 
   int questionNumber = 0;
+  int scoreInt = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +56,8 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
+        Text(
+          'Score: $scoreInt', style: TextStyle(fontSize: 30),),
         //TODO: 5.แสดงผลคะแนนที่ได้ กำหนดให้ตอบถูกต้องในแต่ละข้อจะได้ 1 คะแนน (นักเรียนอาจต้องเขียนโปรแกรมในส่วนอื่นด้วย เพื่อสามารถแสดงผลคะแนนที่ถูกต้อง)
         Expanded(
           flex: 5,
@@ -87,16 +96,18 @@ class _QuizPageState extends State<QuizPage> {
                     //เมื่อกดปุ่ม True เพิ่มข้อมูลเข้าไปในลิสต์ scoreKeeper โดยใช้ add method
                     scoreKeeper.add(
                         Icon(
-                          Icons.check,
+                          Icons.emoji_emotions_outlined,
                           color: Colors.green,
                         ));
                     //ตรวจสอบว่าข้อคำถามจะไม่เกิน index
                     if (questionNumber < questions.length-1) {
                       questionNumber++;
+                      scoreInt++;
                     }
                     else {
                       //TODO: 1.ถ้าคำถามหมดแล้ว ให้เริ่มต้นใหม่ โดยกลับไปที่คำถามเดิมและเคลียร์ scoreKeeper ด้วย
                       questionNumber = 0;
+                      scoreInt = 0;
                       scoreKeeper = [];
                     }
                   });
@@ -127,15 +138,17 @@ class _QuizPageState extends State<QuizPage> {
                     //เมื่อกดปุ่ม True เพิ่มข้อมูลเข้าไปในลิสต์ scoreKeeper โดยใช้ add method
                     scoreKeeper.add(
                         Icon(
-                          Icons.close,
+                          Icons.mood_bad_outlined,
                           color: Colors.red,
                         ));
                     //ตรวจสอบว่าข้อคำถามจะไม่เกิน index
                     if (questionNumber < questions.length-1) {
                       questionNumber++;
+                      scoreInt++;
                     }
                     else {
                       questionNumber = 0;
+                      scoreInt = 0;
                       scoreKeeper = [];
                     }
                   });
@@ -148,7 +161,9 @@ class _QuizPageState extends State<QuizPage> {
         ),
         //แสดงผล icon สำหรับ scoreKeeper
         Row(
-          children: scoreKeeper,
+          children:
+            scoreKeeper,
+
         )
       ],
     );
