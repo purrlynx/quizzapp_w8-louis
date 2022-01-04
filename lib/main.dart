@@ -57,7 +57,7 @@ class _QuizPageState extends State<QuizPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Text(
-          'Score: $scoreInt', style: TextStyle(fontSize: 30),),
+          'Score: $scoreInt', style: TextStyle(fontSize: 25),),
         //TODO: 5.แสดงผลคะแนนที่ได้ กำหนดให้ตอบถูกต้องในแต่ละข้อจะได้ 1 คะแนน (นักเรียนอาจต้องเขียนโปรแกรมในส่วนอื่นด้วย เพื่อสามารถแสดงผลคะแนนที่ถูกต้อง)
         Expanded(
           flex: 5,
